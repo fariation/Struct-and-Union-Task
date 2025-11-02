@@ -1,0 +1,69 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+struct studentType
+{
+    string studentFName, studentLName;
+    int testScore;
+    char grade;
+};
+
+char getGrade(int testScore)
+{
+    if (testScore >= 90)
+        return 'A';
+    else if (testScore >= 80)
+        return 'B';
+    else if (testScore >= 70)
+        return 'C';
+    else if (testScore >= 60)
+        return 'D';
+    else if (testScore >= 50)
+        return 'E';
+    else
+        return 'F';
+}
+
+int main()
+{
+    const int SIZE = 20;
+    studentType students[SIZE];
+    int highest = 0;
+
+    // Input data
+    for (int i = 0; i < SIZE; i++)
+    {
+        cout << "Student " << i + 1 << " First Name: ";
+        cin >> students[i].studentFName;
+        cout << "Last Name: ";
+        cin >> students[i].studentLName;
+        cout << "Score (0-100): ";
+        cin >> students[i].testScore;
+        students[i].grade = getGrade(students[i].testScore);
+        if (students[i].testScore > highest)
+            highest = students[i].testScore;
+    }
+
+    // Output semua data
+    cout << "\nAll Students:\n";
+    for (int i = 0; i < SIZE; i++)
+    {
+        cout << students[i].studentLName << ", " << students[i].studentFName
+             << " - Score: " << students[i].testScore
+             << " Grade: " << students[i].grade << endl;
+    }
+
+    // Output siswa dengan nilai tertinggi
+    cout << "\nHighest Score: " << highest << "\n";
+    cout << "Top Scorers:\n";
+    for (int i = 0; i < SIZE; i++)
+    {
+        if (students[i].testScore == highest)
+        {
+            cout << students[i].studentLName << ", " << students[i].studentFName << endl;
+        }
+    }
+    
+    return 0;
+}
